@@ -8,7 +8,9 @@ var is_player_dead = false
 var camera = null
 
 var score = 0
+var depth = 0
 var high_score = 0
+var greatest_depth = 0
 
 var save_file_path = "user://savegame.save"
 
@@ -59,7 +61,8 @@ func play_sound_on(parent, sound, volume = 0):
 
 func save():
 	var save_dict = {
-		"high_score": high_score
+		"high_score": high_score,
+		"greatest_depth": greatest_depth
 	}
 	return save_dict
 
@@ -78,7 +81,10 @@ func load_game():
 	save_file.open_encrypted_with_pass(save_file_path, File.READ, "enc")
 	var current_line = parse_json(save_file.get_line())
 	
-	high_score = current_line["high_score"]
+	if current_line.has("high_score"):
+		high_score = current_line["high_score"]
+	if current_line.has("greatest_depth"):
+		greatest_depth = current_line["greatest_depth"]
 	save_file.close()
 
 func update_OS_status():
