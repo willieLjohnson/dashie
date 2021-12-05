@@ -148,10 +148,10 @@ autostart = true
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 0 )
-rotation = -2.7672
+rotation = -2.81602
 limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 2.5
+smoothing_speed = 16.0
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 autostart = true
