@@ -89,8 +89,9 @@ func load_game():
 
 
 func update_depth():
-	depth.x = player.position.x
-	depth.y = player.position.y
+	depth.x += abs(player.velocity.normalized().x)
+	depth.y += abs(player.velocity.normalized().y)
+
 	
 func update_OS_status():
 	is_ios = OS.get_name() == "iOS"
