@@ -35,9 +35,7 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
-[node name="HitBox" type="Area2D" parent="." groups=[
-"player",
-]]
+[node name="HitBox" type="Area2D" parent="." groups=["player"]]
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

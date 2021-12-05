@@ -110,9 +110,7 @@ func _physics_process(delta: float) -> void:
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)
-	global_position.x = clamp(global_position.x, topLeft.position.x + 15, bottomRight.position.x - 15)
-	global_position.y = clamp(global_position.y, topLeft.position.y + 15, bottomRight.position.y - 15)
-	
+
 	Global.update_depth()
 	
 func squash_stretch(delta) -> void:
