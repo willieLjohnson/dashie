@@ -50,34 +50,35 @@ func _get_position_near_player(max_range) -> Vector2:
 	var player_position = Global.player.global_position
 	return Vector2(rand_range(player_position.x - max_range, player_position.x + max_range),
 									rand_range(player_position.y - max_range, player_position.y + max_range))
-									
+				
+func _spawn_random_enemy_at(position):
+	var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
+	rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)
+	Global.instance_node(enemies[rand_enemy_index], position, self)
+	wave_enemies_spawned += 1
+
+func _spawn_random_boss_at(position):
+	var rand_boss_index = round(rand_range(0, bosses.size() - 1))
+	var boss = Global.instance_node(bosses[rand_boss_index], position, self)
+	boss.health *= current_wave / 5
+	boss.score_value *= current_wave / 5
+	$EnemySpawnTimer.paused = true
+	wave_enemies_spawned += 1
+							
 func _on_EnemySpawnTimer_timeout() -> void:
 	var max_range = 1000
 	var min_distance = 20
+	
+	var enemy_position = _get_position_near_player(max_range)
+	if _get_distance_from_player(enemy_position) <= 20:
+		enemy_position += Vector2(min_distance, min_distance)
+		
 	# NORMAL ENEMY SPAWN
 	if wave_enemies_spawned < wave_max_enemies and !is_boss_wave:
-		var enemy_position = _get_position_near_player(max_range)
-		if _get_distance_from_player(enemy_position) <= 20:
-			enemy_position += Vector2(min_distance, min_distance)
-		
-		var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
-		rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)
-		Global.instance_node(enemies[rand_enemy_index], enemy_position, self)
-		wave_enemies_spawned += 1
-		
+		_spawn_random_enemy_at(enemy_position)
 	# BOSS SPAWN
 	elif is_boss_wave and wave_enemies_spawned < wave_max_enemies:
-		var boss_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
-									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
-		while boss_position.x <= bottomRight.position.x and boss_position.x > topLeft.position.x and boss_position.y < bottomRight.position.y and boss_position.y > topLeft.position.y:
-			boss_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
-									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
-		var rand_boss_index = round(rand_range(0, bosses.size() - 1))
-		var boss = Global.instance_node(bosses[rand_boss_index], boss_position, self)
-		boss.health *= current_wave / 5
-		boss.score_value *= current_wave / 5
-		$EnemySpawnTimer.paused = true
-		wave_enemies_spawned += 1
+		_spawn_random_boss_at(enemy_position)
 	else:
 		$DifficultyTimer.paused = true
 
@@ -114,8 +115,10 @@ func _on_DifficultyTimer_timeout() -> void:
 
 
 func _on_PowerupSpawnTimer_timeout() -> void:
-	var powerup_position = Vector2(rand_range(topLeft.position.x, bottomRight.position.x),
-									rand_range(topLeft.position.y, bottomRight.position.y))
+	var powerup_position = _get_position_near_player(100)
+	if _get_distance_from_player(powerup_position) < 10:
+		powerup_position += Vector2(10,10)
+		
 	var rand_powerup_index = round(rand_range(0, powerups.size() - 1))
 	Global.instance_node(powerups[rand_powerup_index], powerup_position, self)
 
