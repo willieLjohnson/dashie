@@ -48,12 +48,12 @@ bosses = [ ExtResource( 13 ) ]
 powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-margin_right = 904.0
-margin_bottom = 424.0
+margin_right = 900.0
+margin_bottom = 425.0
 
 [node name="Pause" parent="UI/Container" index="0"]
-margin_right = 884.0
-margin_bottom = 404.0
+margin_right = 880.0
+margin_bottom = 405.0
 
 [node name="MoveJoystick" parent="UI/Container/Joysticks" index="0"]
 position = Vector2( 148, 315 )
@@ -112,33 +112,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WaveContainer" parent="UI/Container" index="3"]
-margin_top = 190.0
-margin_right = 884.0
-margin_bottom = 234.0
-
-[node name="Label" parent="UI/Container/WaveContainer" index="0"]
-margin_left = 361.0
-margin_right = 479.0
-
-[node name="CurrentWave" parent="UI/Container/WaveContainer" index="1"]
-margin_left = 489.0
-margin_right = 502.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 450, 212 )
 rotation = -2.7672
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
-
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../UI/Container/CanvasLayer")
 update_rotation = false
 update_scale = false
 
@@ -147,7 +130,7 @@ wait_time = 2.5
 autostart = true
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( 0, 0 )
+position = Vector2( 450, 212 )
 rotation = -2.81602
 limit_smoothed = true
 smoothing_enabled = true

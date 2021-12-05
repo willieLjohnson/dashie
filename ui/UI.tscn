@@ -128,13 +128,13 @@ scale = Vector2( 0.4, 0.4 )
 position = Vector2( 816, 336 )
 scale = Vector2( 0.4, 0.4 )
 
-[node name="CanvasLayer" type="Node2D" parent="Container"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Container"]
 
 [node name="Labels" type="HBoxContainer" parent="Container/CanvasLayer"]
-margin_left = -428.0
-margin_top = -200.0
-margin_right = 428.0
-margin_bottom = -145.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 866.0
+margin_bottom = 65.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 alignment = 1
