@@ -43,14 +43,22 @@ func _exit_tree() -> void:
 	Global.node_creation_parent = null
 
 
+func _get_distance_from_player(position) -> float:
+	return (position - global_position).length()
+	
+func _get_position_near_player(max_range) -> Vector2:
+	var player_position = Global.player.global_position
+	return Vector2(rand_range(player_position.x - max_range, player_position.x + max_range),
+									rand_range(player_position.y - max_range, player_position.y + max_range))
+									
 func _on_EnemySpawnTimer_timeout() -> void:
+	var max_range = 1000
+	var min_distance = 20
 	# NORMAL ENEMY SPAWN
 	if wave_enemies_spawned < wave_max_enemies and !is_boss_wave:
-		var enemy_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
-									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
-		while enemy_position.x <= bottomRight.position.x and enemy_position.x > topLeft.position.x and enemy_position.y < bottomRight.position.y and enemy_position.y > topLeft.position.y:
-			enemy_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
-									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
+		var enemy_position = _get_position_near_player(max_range)
+		if _get_distance_from_player(enemy_position) <= 20:
+			enemy_position += Vector2(min_distance, min_distance)
 		
 		var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
 		rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)

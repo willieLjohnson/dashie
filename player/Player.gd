@@ -26,9 +26,6 @@ var is_dead = false setget set_is_dead
 
 var powerup_reset = []
 
-var topLeft = null
-var bottomRight = null
-
 var parent = null
 
 
@@ -46,10 +43,7 @@ func _ready() -> void:
 	Global.player = self
 	self.is_dead = false
 	parent = get_parent()
-	if parent != null:
-		topLeft = parent.get_node("Camera2D/Limits/TopLeft")
-		bottomRight = parent.get_node("Camera2D/Limits/BottomRight")
-	
+
 func _exit_tree() -> void:
 	Global.player = null
 
