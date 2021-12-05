@@ -8,9 +8,9 @@ var is_player_dead = false
 var camera = null
 
 var score = 0
-var depth = 0
+var depth = Vector3.ZERO
 var high_score = 0
-var greatest_depth = 0
+var greatest_depth = Vector3.ZERO
 
 var save_file_path = "user://savegame.save"
 
@@ -83,10 +83,15 @@ func load_game():
 	
 	if current_line.has("high_score"):
 		high_score = current_line["high_score"]
-	if current_line.has("greatest_depth"):
-		greatest_depth = current_line["greatest_depth"]
+#	if current_line.has("greatest_depth"):
+#		greatest_depth = current_line["greatest_depth"]
 	save_file.close()
 
+
+func update_depth():
+	depth.x = player.position.x
+	depth.y = player.position.y
+	
 func update_OS_status():
 	is_ios = OS.get_name() == "iOS"
 	is_android = OS.get_name() == "Android"

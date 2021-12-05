@@ -35,8 +35,9 @@ func _ready() -> void:
 	shoot_joystick.position = Vector2(size.x - 130, size.y - 100)
 	
 func _process(_delta: float) -> void:
-	if Global.is_player_dead:
-		$UI/Container/CanvasLayer/Labels/HighScore.visible = true
+#	if Global.is_player_dead:
+#		$UI/Container/CanvasLayer/Labels/HighScore.visible = true
+	Global.depth.z = current_wave
 	
 func _exit_tree() -> void:
 	Global.node_creation_parent = null

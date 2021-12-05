@@ -113,6 +113,8 @@ func move() -> void:
 	global_position.x = clamp(global_position.x, topLeft.position.x + 15, bottomRight.position.x - 15)
 	global_position.y = clamp(global_position.y, topLeft.position.y + 15, bottomRight.position.y - 15)
 	
+	Global.update_depth()
+	
 func squash_stretch(delta) -> void:
 	var scale_vel = Vector2(abs(velocity.x), abs(velocity.y))
 	var squash = ((scale_vel.y + scale_vel.x) * 0.0002)

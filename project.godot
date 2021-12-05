@@ -10,7 +10,8 @@ config_version=4
 
 [application]
 
-config/name="Wave Shooter"
+config/name="Dashie"
+config/description="Rogulike"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
