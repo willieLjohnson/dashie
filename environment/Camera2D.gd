@@ -18,11 +18,11 @@ func _exit_tree() -> void:
 func _process(delta: float) -> void:
 	velocity_factor = (1 + (Global.player.velocity.length() / 500))
 	zoom = lerp(zoom, (base_zoom * velocity_factor), damp)
-	
-	if screen_shake_started:
-		global_position += Vector2(rand_range(-shake_intensity, shake_intensity), rand_range(-shake_intensity, shake_intensity)) * delta
-	else:
-		global_position = lerp(global_position, Vector2(320, 180), damp)
+#
+#	if screen_shake_started:
+#		global_position += Vector2(rand_range(-shake_intensity, shake_intensity), rand_range(-shake_intensity, shake_intensity)) * delta
+#	else:
+#		global_position = lerp(global_position, Vector2(320, 180), damp)
 		
 func screen_shake(intensity, time):
 	return
